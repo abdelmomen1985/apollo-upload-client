@@ -16,6 +16,7 @@ export const Upload = () => {
   });
   const onDrop = useCallback(
     ([file]) => {
+      console.log("web will upload");
       uploadFile({ variables: { file } });
     },
     [uploadFile]

@@ -3,8 +3,8 @@ import gql from "graphql-tag";
 import React from "react";
 
 export const filesQuery = gql`
-  {
-    files
+  query {
+    hello
   }
 `;
 
@@ -14,10 +14,10 @@ export const Files = () => {
   if (loading) {
     return <div>loading...</div>;
   }
-
+  console.log(data);
   return (
     <div>
-      {data.files.map(x => (
+      {data && data.files.map(x => (
         <img
           style={{ width: 200 }}
           key={x}
