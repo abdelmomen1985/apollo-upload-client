@@ -5,21 +5,23 @@ import { useMutation } from "@apollo/react-hooks";
 import { filesQuery } from "./Files";
 
 const uploadFileMutation = gql`
-  mutation UploadFile($file: Upload!) {
-    uploadFile(file: $file)
+  mutation upload($file: Upload!) {
+    upload(file: $file) {
+      filename
+    }
   }
 `;
 
 export const Upload = () => {
-  const [uploadFile] = useMutation(uploadFileMutation, {
-    refetchQueries: [{ query: filesQuery }]
+  const [upload] = useMutation(uploadFileMutation, {
+    refetchQueries: [{ query: filesQuery }],
   });
   const onDrop = useCallback(
     ([file]) => {
       console.log("web will upload");
-      uploadFile({ variables: { file } });
+      upload({ variables: { file } });
     },
-    [uploadFile]
+    [upload]
   );
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
